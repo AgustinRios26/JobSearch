@@ -1,0 +1,16 @@
+.main-jobs{
+    height: 80%;
+    padding: 30px 0px;
+    background-color: #fff;
+}
+
+.main-jobs .jobs {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 0.4fr));
+    text-align: center;
+}
+
+.main-jobs .jobs .job p{
+    
+    text-overflow: ellipsis;
+}
