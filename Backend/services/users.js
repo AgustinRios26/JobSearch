@@ -26,39 +26,39 @@ class Users{
                     message
                 }
             }
-            if(error.errors.name){
-                const message = `Please enter a name `
+            // if(error.errors.name){
+            //     const message = `Please enter a name `
 
-                return {
-                    error:true,
-                    message
-                }
-            }
+            //     return {
+            //         error:true,
+            //         message
+            //     }
+            // }
 
-            if(error.errors.password){
-                const message = `Please enter a password `
+            // if(error.errors.password){
+            //     const message = `Please enter a password `
 
-                return {
-                    error:true,
-                    message
-                }
-            }
-            if(error.errors.email){
-                const message = `Please enter a email`
+            //     return {
+            //         error:true,
+            //         message
+            //     }
+            // }
+            // if(error.errors.email){
+            //     const message = `Please enter a email`
 
-                return {
-                    error:true,
-                    message
-                }
-            }
-            if(error.errors.role){
-                const message = `Please select a role `
+            //     return {
+            //         error:true,
+            //         message
+            //     }
+            // }
+            // if(error.errors.role){
+            //     const message = `Please select a role `
 
-                return {
-                    error:true,
-                    message
-                }
-            }
+            //     return {
+            //         error:true,
+            //         message
+            //     }
+            // }
  
             
 
@@ -84,6 +84,16 @@ class Users{
             return user 
         }catch(error){
             console.log(error)
+        }
+    }
+
+    // Nos permite hacer el login
+    async getByEmail(email){
+        try {
+            const user = await UserModel.findOne({email})
+            return user  
+        } catch (error) {
+            console.log(error);
         }
     }
 

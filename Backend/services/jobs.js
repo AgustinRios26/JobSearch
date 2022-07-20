@@ -31,30 +31,30 @@ class Jobs{
         const job = await JobsModel.create(data)
         return job
     } catch(error){
-        if(error.errors.title){
-            const message = `Please enter a title `
-            return {
-                error:true,
-                message
-            }}
-        if(error.errors.category){
-            const message = `Please select a category `
-            return {
-                error:true,
-                message
-            }}
-        if(error.errors.country){
-            const message = `Please enter the country `
-            return {
-                error:true,
-                message
-            }}
-        if(error.errors.description){
-            const message = `Please describe the job `
-            return {
-                error:true,
-                message
-            }}  
+        // if(error.errors.title){
+        //     const message = `Please enter a title `
+        //     return {
+        //         error:true,
+        //         message
+        //     }}
+        // if(error.errors.category){
+        //     const message = `Please select a category `
+        //     return {
+        //         error:true,
+        //         message
+        //     }}
+        // if(error.errors.country){
+        //     const message = `Please enter the country `
+        //     return {
+        //         error:true,
+        //         message
+        //     }}
+        // if(error.errors.description){
+        //     const message = `Please describe the job `
+        //     return {
+        //         error:true,
+        //         message
+        //     }}  
         }
 }
 // Agrega los datos de la persona que se postula al trabajo 
