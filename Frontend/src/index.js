@@ -5,7 +5,6 @@ import App from './App';
 import { BrowserRouter as Router } from 'react-router-dom';
 import reportWebVitals from './reportWebVitals';
 import AuthProvider from './Context/AuthContext';
-import Test from './components/Text';
 // import Theme from './Context/Theme';
 
 

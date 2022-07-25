@@ -1,11 +1,12 @@
 import React, { useContext, useRef } from 'react'
-import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 import { postWithToken } from '../api';
 import { authContext } from '../Context/AuthContext';
 
 export default function PostJob() {
-     const context = useContext(authContext)
-
+     const {auth} = useContext(authContext)
+     const navigate = useNavigate()
      
     // const [error, setError] = useState({
     //   isError:false,
@@ -13,33 +14,41 @@ export default function PostJob() {
     //   loading:false
     // });
     const title = useRef()
-    const email = useRef()
-    const password = useRef()
-    const role = useRef()
+    const description = useRef()
+    const category = useRef()
+    const country = useRef()
+    const province = useRef()
+    const city = useRef()
+    const salary = useRef()
   
   
     const postJob = (event) =>{
       event.preventDefault()
-    //   console.log(role.current.value);
-    //   setError({...error,loading:true})
       postWithToken("/api/jobs",{
+        employer:{
+          id:auth.id,
+          name:auth.name,
+          email: auth.email,
+          role: auth.role,
+        },
          title:title.current.value,
-        // email: email.current.value,
-        // password:password.current.value,
-        // role:role.current.value
+         description:description.current.value,
+         category: category.current.value.split(", "),
+         location: {
+          country: country.current.value,
+          province: province.current.value,
+          city: city.current.value
+      },
+      salary: salary.current.value
       })
       .then(data=>{
         console.log(data)
-        console.log(title.current.value)
-        context.setAuth({
-          ...context.auth,
-          offers: [...context.auth.offers, postJob.data],
-        })
-        // // console.log(...context.auth)
-        // // setError({...error,loading:false})
-        // console.log(context)
-        // console.log(context.setAuth)
-        // console.log(context.id)
+        console.log(data.data)
+        console.log(auth)
+        alert("Empleo creado con éxito")
+        navigate("/employer",{
+          replace:true
+      })
       })
       .catch(error=>{
         console.log(error.response.data);
@@ -57,12 +66,14 @@ export default function PostJob() {
         <h1>Post Job</h1>
          <form onSubmit={postJob}>
           <input ref={title} name="title" placeholder="Title" />
-          {/* <select ref={role} defaultValue="applicant">
-            <option value="applicant" >Applicant</option>
-            <option value="employer" >Employer</option>
-          </select> */}
+          <input ref={description} name="description" placeholder="description" />
+          <input ref={category} name="category" placeholder="category" />
+          <input ref={country} name="country" placeholder="Country" />
+          <input ref={province} name="province" placeholder="province" />
+          <input ref={city} name="city" placeholder="City" />
+          <input ref={salary} name="salary" placeholder="salary" />
 
-          <button>SignUp</button>
+          <button>Create</button>
       </form>
 
     {/* {error.loading&&<p>Cargando... Espere</p>}

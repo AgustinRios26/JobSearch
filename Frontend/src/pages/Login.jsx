@@ -20,44 +20,20 @@ export default function Login() {
             password:password.current.value
         })
         
-        // fetch("http://localhost:4000/api/auth/login",{
-        //     method:"POST",
-        //     headers:{
-        //         "Content-Type":"application/json"
-        //     },
-        //     body:JSON.stringify({
-        //         email: email.current.value,
-        //         password: password.current.value
-        //     })
-    //     .then(data=> {
-    //         localStorage.setItem("token", data.token)
-    //         context.setAuth({
-    //             id:data.user.id,
-    //             name:data.user.name,
-    //             logged:true
-    //         })
-    //         fetch("http://localhost:4000/api/users",{
-    //             headers:{
-    //                 "Authorization":"Bearer "+localStorage.getItem("token")
-    //             }
-    //         })
-    //         .then((response)=>{
-    //             return response.json()
-    //         })
-    //         .then(data=>{
-    //             console.log(data)
-    //         })
-    //     })
-    //     .catch(error=>console.log(error))
-    // }
     .then(data=>{
+        console.log(data)
+        console.log(data.data)
         const {token,user} = data.data
         localStorage.setItem("token",token) // Guardamos el token que recibimos
+        console.log(context)
         context.setAuth({
             id:user.id,
             name:user.name,
+            email: user.email,
+            role: user.role,
             logged:true
         })
+        console.log(context)
         navigate("/",{
             replace:true
         })

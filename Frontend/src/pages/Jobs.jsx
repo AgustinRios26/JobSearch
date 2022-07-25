@@ -1,50 +1,109 @@
 import React, { useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { getWithToken, postWithToken } from '../api';
-import { authContext } from '../Context/AuthContext';
+import pinUbicacion from '../resources/pin-ubicacion.png'
+import imgCategory from '../resources/category2.jpg'
 import "../styles/jobs.css"
 
 export default function Jobs() {
-  const context = useContext(authContext)
-  const [filter, setFilter] = useState("all");
-  const [category, setCategory] = useState("");
-  const [location, setLocation] = useState("");
   // const [error, setError] = useState({
   //   isError:false,
   //   message:"",
   //   loading:false
   // });
   const [jobs, setJobs] = useState([]);
+  const searchText = useRef()
+  const country = useRef()
+  const province = useRef()
+  const city = useRef()
 
 
+    //Get All Jobs
+    const getAllJobs = () => {
+      getWithToken("/api/jobs",{
+      })
+      .then(({data})=>{
+        console.log(data)
+        for (let i = 0; i < data.length; i++) {
+          setJobs(data)
+          console.log(data[i])
+          
+        }
+      })
+      .catch(error=>{
+        console.log(error.response.data);
+      })
+    }
+
+const sendFilter = (event) => {
+  event.preventDefault();
+  console.log(country.current.value)
+  if (searchText.current.value !== "") {
+    postWithToken('/api/jobs/category',{
+      category:searchText.current.value.split(", "),
+    })
+        .then( ({data})  => {
+          console.log(data)
+          for (let i = 0; i < data.length; i++) {
+            setJobs(data)
+            console.log(data[i])
+            
+          }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+  }
+  if (country.current.value !=="" || province.current.value !=="" || city.current.value !=="" ) {
+  
+    event.preventDefault()
+      postWithToken('/api/jobs/location',{
+      
+        country: country.current.value,
+        province: province.current.value,
+        city: city.current.value
+    
+  })
+          .then( ({data}) => {
+            console.log(data)
+            for (let i = 0; i < data.length; i++) {
+              setJobs(data)
+              console.log(data[i])
+              
+            }
+          })
+          .catch(error => {
+              console.log(error);
+          })
+  }
+}
+ 
   useEffect(() => {
-    getWithToken("/api/jobs",{
-    })
-    .then(({data})=>{
-      console.log(data)
-      for (let i = 0; i < data.length; i++) {
-        setJobs(data)
-        console.log(data[i])
-        
-      }
-    })
-    .catch(error=>{
-      console.log(error.response.data);
-    })
+  getAllJobs();
   }, []);
-
 
   return (
     <main className='main-jobs'>Jobs
+    <section>
+      <h3>Filters</h3>
+      <form onSubmit={sendFilter}>
+      <input ref={searchText} name="InputText" placeholder="InputText" />
+      <input ref={country} name="InputText" placeholder="country" />
+      <input ref={province} name="province" placeholder="province" />
+      <input ref={city} name="city" placeholder="city" />
+      <button>Send</button>
+      </form>
+
+    </section>
  {/* <button onClick={loadJobs}>Recuperar trabajos</button> */}
- <div className='jobs' > 
+ <div className='cards-jobs' > 
  {jobs.map(job => (
    <div className='job' key={job._id}>
-     <h3> {job.title} </h3>
-     <p> {job.description} </p>
-     <p> {job.category} </p>
-     <p> {job.location.country} </p>
-     <Link to={`/jobs/${job._id}`}>See more</Link>
+     <h3> {job.title} </h3>  
+     <p className='description'> {job.description} </p>
+     <p className='category'><img src={imgCategory} />{job.category} </p>
+     <p className='country'> <img src={pinUbicacion} /> {job.location.country} </p>
+     <div><Link className='btn-job-link' to={`/jobs/${job._id}`}>See more</Link></div>
    </div>
  ))}
  </div>

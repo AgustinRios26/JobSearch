@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react';
 import {Route,Routes,useLocation} from 'react-router-dom'
 import Navbar from './components/Navbar';
-import Template from './components/Template';
 import Details from './pages/Details';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -14,10 +13,11 @@ import { postWithToken } from './api';
 import Jobs from './pages/Jobs';
 import Job from './pages/Job';
 import PostJob from './pages/PostJob';
+import Employer from './pages/Employer'
+import Me from './pages/Me';
 
 
 export default function App() {
-  const location = useLocation()
 
   // const {theme, toggleTheme} = useContext(themeContext);
 
@@ -53,6 +53,8 @@ export default function App() {
         <Route path='/props' element={<Props/>}/>
         <Route path='/jobs' element={<Jobs/>}/>
         <Route path='/jobs/:id' element={<Job/>}/>
+        <Route path='/me' element={<Me/>}/>
+        <Route path='/employer' element={<Employer/>}/>
         <Route path='/postjob' element={<PostJob/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
