@@ -17,29 +17,20 @@ export default function Home() {
     })
   }
   return (
-    <main>
+    <main className='main-home' >
         <video src={videoFondo} type="video/mp4" autoPlay loop muted/>
       <div className='main-content'> 
        <h1>Welcome to JobSearch</h1>
         <p>Discover the Best Jobs and connect with companies<br/>
           or Post a Job!</p>
-        </div>
+       
         <div className='home-links' >
           <p>Do you have a Account?</p>
         <Link className='btn-link' to="/login">Click Here!</Link>
         <p>New to JobSearch?</p>
         <Link className='btn-link' to="/signup">Join Now!</Link>
         </div>
-
-        <input ref={empleo} placeholder='id empleo' />
-        <button onClick={aplicar} >Aplicar</button>
-
-        <Link to="/details/:id">Ir a componente</Link>
-        <Link to="/props" state={{
-          name:"Tzuzul",
-          id:"abc123",
-          active:true
-        }}>Ir a componente con props</Link>
+        </div>
     </main>
   )
 }

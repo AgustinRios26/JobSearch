@@ -31,20 +31,31 @@ main {
   background-color: rgba(0, 0, 0, 0.15);
 }
 
+.main-home{
+  display: flex;
+  justify-content: center;
+}
+
 main .main-content{
   display: flex;
   text-align: center;
   align-items: center;
   flex-direction: column;
-  padding-top: 70px;
+  margin-top: 30px;
+  padding: 20px 20px;
   font-size: 22px;
-  
+  border-radius: 12%;
+  background-color: rgba(200, 200, 200, 0.1);
+  box-shadow: 0px 0px 70px 35px rgba(0,0,0,0.4);
+
+}
+main .main-content h1{
+  font-weight: 700;
 }
 main .main-content p{
   padding-top: 15px;
-  color: red;
+  font-weight: 500;
 }
-
 
 
 main .home-links{

@@ -1,7 +1,10 @@
 import React, {useContext, useRef} from 'react'
 import { authContext } from '../Context/AuthContext';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { post } from '../api'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
+import "../styles/login.css"
 
 export default function Login() {
 
@@ -42,13 +45,23 @@ export default function Login() {
 }
   return (
     <div>
-        {/* {console.log(context)} */}
-        <h1>Login</h1>
-        <form onSubmit={login}>
-            <input ref={email} placeholder="Email" type="email"/>
-            <input ref={password} placeholder="password" type="password"/>
+        <form onSubmit={login} className="form">
+            <div className='items-form' >
+            <h2>JobSearch</h2>
+            <h3>Login</h3>
+                <div className='email'>
+                    <FontAwesomeIcon icon={faEnvelope} className="icon-user" /> 
+                    <input className='input-email' ref={email} placeholder="Email" type="email"/>
+                </div>
+            <div className='password'>
+            <FontAwesomeIcon icon={faLock} className="icon-lock" />
+                <input className='input-password' ref={password} placeholder="Password" type="password"/>
+            </div>
 
-            <button>Login</button>
+            <button className='btn-login'>Login</button>
+            <p>Don't have an Account? </p>
+            <div className='btn-clickHere'><Link className='btn-signup' to="/signup">Click Here!</Link></div>
+            </div>
         </form>
     </div>
   )
