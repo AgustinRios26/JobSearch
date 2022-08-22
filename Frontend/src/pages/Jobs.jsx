@@ -83,15 +83,17 @@ const sendFilter = (event) => {
   }, []);
 
   return (
-    <main className='main-jobs'>Jobs
-    <section>
+    <main className='main-jobs'>
+    <section className='filters'>
       <h3>Filters</h3>
-      <form onSubmit={sendFilter}>
-      <input ref={searchText} name="InputText" placeholder="InputText" />
-      <input ref={country} name="InputText" placeholder="country" />
-      <input ref={province} name="province" placeholder="province" />
-      <input ref={city} name="city" placeholder="city" />
-      <button>Send</button>
+      <form className='form-filters' onSubmit={sendFilter}>
+      <input ref={searchText} name="InputText" placeholder="Name" />
+      <input ref={country} name="InputText" placeholder="Country" />
+      <input ref={province} name="province" placeholder="Province" />
+      <input ref={city} name="city" placeholder="City" />
+      <button>Search</button>
+      <div className='btn-reset'>
+      <button className='button-reset' onClick={getAllJobs} >Reset Filters</button></div>
       </form>
 
     </section>

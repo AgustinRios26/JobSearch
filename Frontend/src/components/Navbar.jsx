@@ -24,11 +24,11 @@ export default function Navbar() {
          {console.log("Render...")}
          {/* <button className='btn' onClick={toggleTheme} >{theme}</button> */}
         
-           <div> <Link to="/jobs" onClick={showNavbar}>Jobs</Link></div>
            <div> {!context.auth.logged&&<Link to="/login" onClick={showNavbar} >Login</Link>}</div>
            <div> {!context.auth.logged&&<Link to="/signup" onClick={showNavbar}>SignUp</Link>}</div>
+           <div> {context.auth.logged&&<Link to="/jobs" onClick={showNavbar}>Jobs</Link>}</div>
            <div> {context.auth.logged&&<Link to="/postjob" className='hi' onClick={showNavbar}>Post a Job</Link>}</div>
-           <div> {context.auth.logged&&<Link to="/me" className='hi' onClick={showNavbar}>Hi! {context.auth.name}</Link>}</div>
+           <div> {context.auth.logged&&<Link to="/profile" className='hi' onClick={showNavbar}>Hi! {context.auth.name}</Link>}</div>
            <div> {context.auth.logged&&<LogOut/>}</div>
         
         <button className='nav-btn nav-close-btn'  onClick={showNavbar} >

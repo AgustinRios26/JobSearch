@@ -1,6 +1,7 @@
-import React, { useRef } from 'react'
+import React, { useContext,useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { putWithToken } from '../api'
+import { authContext } from '../Context/AuthContext'
 import videoFondo from "../resources/video-fondo.mp4"
 
 export default function Home() {
@@ -16,6 +17,12 @@ export default function Home() {
       console.log(error)
     })
   }
+  const applicant = "applicant"
+  const employer = "employer"
+  // const admin = "admin"
+
+ const context = useContext(authContext);
+
   return (
     <main className='main-home' >
         <video src={videoFondo} type="video/mp4" autoPlay loop muted/>
@@ -25,10 +32,16 @@ export default function Home() {
           or Post a Job!</p>
        
         <div className='home-links' >
-          <p>Do you have a Account?</p>
-        <Link className='btn-link' to="/login">Click Here!</Link>
-        <p>New to JobSearch?</p>
-        <Link className='btn-link' to="/signup">Join Now!</Link>
+          {!context.auth.logged&&
+          <p>Do you have a Account?</p>}
+        {!context.auth.logged&&<Link className='btn-link' to="/login">Click Here!</Link>}
+        {!context.auth.logged&&<p>New to JobSearch?</p>}
+        {!context.auth.logged&&<Link className='btn-link' to="/signup">Join Now!</Link>}
+        {context.auth.role == applicant &&<p>Find a Job</p>}
+        {context.auth.role == applicant&&<Link className='btn-link' to="/jobs">Find Now!</Link>}
+        <p></p>
+        {context.auth.role == employer&&<p>Find employees to hire!</p>}
+        {context.auth.role == employer&&<Link className='btn-link' to="/postjob">Post a Job!</Link>}
         </div>
         </div>
     </main>

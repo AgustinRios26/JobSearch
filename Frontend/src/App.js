@@ -15,6 +15,7 @@ import Job from './pages/Job';
 import PostJob from './pages/PostJob';
 import Employer from './pages/Employer'
 import Me from './pages/Me';
+import Profile from './pages/Profile';
 
 
 export default function App() {
@@ -33,6 +34,7 @@ export default function App() {
         context.setAuth({
           id:data.user.id,
           name:data.user.name,
+          role:data.user.role,
           logged:true
         })
       }
@@ -56,6 +58,7 @@ export default function App() {
         <Route path='/me' element={<Me/>}/>
         <Route path='/employer' element={<Employer/>}/>
         <Route path='/postjob' element={<PostJob/>}/>
+        <Route path='/profile' element={<Profile/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
     </>

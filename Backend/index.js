@@ -1,7 +1,8 @@
 const express = require("express")
 const cors = require("cors")
 const { port } = require("./config")
-const {connection} = require("./config/db")
+const {connection} = require("./config/db");
+require("dotenv").config({path: '.env'});
 
 //Importando routes
 const users = require("./routes/users")
@@ -14,7 +15,7 @@ const app = express()
 
 //Middleware de JSON
 app.use(cors({
-    origin: ["http://localhost:3000"]
+    origin: [process.env.URL_FRONTEND]
 }))
 app.use(express.json())
 
