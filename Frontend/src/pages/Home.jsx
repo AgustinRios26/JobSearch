@@ -16,7 +16,7 @@ export default function Home() {
         <div className='img-home absolute md:block hidden'>
       <img className='object-cover max-h-[670px] w-screen'src={imgHome} alt="img-home"/>
       </div> 
-        <div className='md:relative flex flex-col items-center pt-20 md:mb-32'>
+        <div className='md:relative flex flex-col items-center pt-20 lg:pb-22'>
 
        <h1 className='font-bold text-slate-100 text-6xl px-4 text-center '>Welcome to JobSearch</h1>
          
