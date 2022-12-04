@@ -1,13 +1,10 @@
 import { useContext, useEffect } from 'react';
-import {Route,Routes,useLocation} from 'react-router-dom'
+import {Route,Routes} from 'react-router-dom'
 import Navbar from './components/Navbar';
-import Details from './pages/Details';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
-import Props from './pages/Props';
 import SignUp from './pages/SignUp';
-// import { themeContext } from './Context/Theme';
 import { authContext } from './Context/AuthContext';
 import { postWithToken } from './api';
 import Jobs from './pages/Jobs';
@@ -16,12 +13,10 @@ import PostJob from './pages/PostJob';
 import Employer from './pages/Employer'
 import Me from './pages/Me';
 import Profile from './pages/Profile';
+import Footer from './components/Footer';
 
 
 export default function App() {
-
-  // const {theme, toggleTheme} = useContext(themeContext);
-
   const context = useContext(authContext)
   
   
@@ -29,7 +24,6 @@ export default function App() {
     postWithToken("/api/auth/validate")
     .then(({data})=>{
       if(data.failed){
-        console.log(data)
       }else{
         context.setAuth({
           id:data.user.id,
@@ -45,14 +39,11 @@ export default function App() {
 
   return (
     <>
-
       <Navbar/>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/signup' element={<SignUp/>}/>
-        <Route path='/details/:id' element={<Details/>}/>
-        <Route path='/props' element={<Props/>}/>
         <Route path='/jobs' element={<Jobs/>}/>
         <Route path='/jobs/:id' element={<Job/>}/>
         <Route path='/me' element={<Me/>}/>
@@ -61,6 +52,7 @@ export default function App() {
         <Route path='/profile' element={<Profile/>}/>
         <Route path='*' element={<NotFound/>}/>
       </Routes>
+      <Footer/>
     </>
   );
 }
