@@ -1,6 +1,6 @@
 const express = require("express")
 const {authMiddleware} = require("../middleware/authValidation")
-const JobsService = require("../services/jobs")
+const JobsService = require("../controller/jobs")
 
 function jobs(app){
     const router = express.Router()
@@ -55,7 +55,7 @@ function jobs(app){
         const job = await jobServ.getJobByEmployer(req.user)
         return res.json(job)
     })
-    router.delete("/:id",...authMiddleware("employer-admin"), async (req,res)=>{
+    router.delete("/:id", async (req,res)=>{
         const job = await jobServ.deleteJob(req.params.id)
         return res.json(job)
     })

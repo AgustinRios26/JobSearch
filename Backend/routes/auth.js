@@ -1,5 +1,5 @@
 const express = require("express")
-const AuthService = require("../services/auth")
+const AuthService = require("../controller/auth")
 const { verifyToken } = require('../middleware/authValidation')
 
 
@@ -22,7 +22,7 @@ function auth(app){
     })
 
     router.post('/validate', verifyToken, async (req, res) => {
-        return res.json({ logged: true, user: req.user })
+        return res.json({  success:false, user: req.user })
    })
 }
 

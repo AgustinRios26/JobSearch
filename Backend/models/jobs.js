@@ -37,9 +37,9 @@ const jobsSchema = new Schema({
       default: Date.now 
   },
      location: {
-      country: String,
-      province: String,
-      city: String
+        country: String,
+        province: {type: String, lowercase: true },
+        city: {type: String, lowercase: true }
   },
      
   salary: Number,
@@ -49,4 +49,4 @@ const jobsSchema = new Schema({
 
 const JobsModel = mongoose.model("Jobs",jobsSchema)
 
-module.exports = JobsModel
+module.exports = JobsModel 

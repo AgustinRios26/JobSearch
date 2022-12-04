@@ -26,5 +26,4 @@ jobs(app)
 
 
 app.listen(port,()=>{
-    console.log("Listening: http://localhost:"+port)
 })
