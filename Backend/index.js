@@ -15,7 +15,7 @@ const app = express()
 
 //Middleware de JSON
 app.use(cors({
-    origin: [process.env.URL_FRONTEND]
+    origin: process.env.URL_FRONTEND
 }))
 app.use(express.json())
 
