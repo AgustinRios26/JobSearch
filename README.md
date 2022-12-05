@@ -3,7 +3,7 @@
 
 <h3>Frontend deploy: <a href="https://jobsearch-ar.vercel.app/">Frontend</a> </h3>
 <h3>Backend deploy: <a href="https://jobsearch.up.railway.app/">Backend</a> </h3>
-<h3>Documentacion Postman: <a href="https://documenter.getpostman.com/view/20685324/VUqrMGEy">Postman</a> </h3>
+<h3>Documentacion Postman: <a href="https://documenter.getpostman.com/view/20685324/VUqpvJuM">Postman</a> </h3>
 
 <br>
 <hr>
