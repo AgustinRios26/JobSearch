@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const url = "http://localhost:4000"
+const url = "https://jobsearch.up.railway.app"
 
 const instance = axios.create({
     baseURL:url

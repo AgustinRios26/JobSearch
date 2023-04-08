@@ -4,7 +4,7 @@ const { jwtSecret } = require("../config")
 const verifyToken = (req, res, next) => {
     const bearer = req.headers.authorization
 
-    if (!bearer) return res.status(401).json({ error: true, message: 'No token provider' })
+    if (!bearer) return res.status(401).json({ errors: true, message: 'No token provider' })
 
     const [, token] = bearer.split(' ')
 
@@ -12,8 +12,10 @@ const verifyToken = (req, res, next) => {
         const decoded = jwt.verify(token, jwtSecret)
         req.user = decoded
         return next()
-    } catch (error) {
-        return res.status(401).json({ failed: true, error })
+    } catch ({message,name}) {
+        return res.status(401).json({success:false,
+            message,
+            type:name })
     }
 }
 
@@ -43,7 +45,7 @@ function authValidation(req,res,next){
                 // const message = error.message
                 // const name = error.name
                 return res.status(403).json({
-                    error:true,
+                    success:false,
                     message,
                     type:name
                 })
@@ -55,7 +57,7 @@ function authValidation(req,res,next){
     
 
     return res.status(403).json({
-        error:true,
+        success:false,
         message:"Insufficient permissions"
     })
 }
@@ -65,7 +67,7 @@ function adminValidation(req,res,next){
         return next()
     }else{
         return res.status(403).json({
-            error:true,
+            success:false,
             message:"Insufficient permissions"
         })
     }
@@ -75,7 +77,7 @@ function applicantValidation(req,res,next){
         return next()
     }else{
         return res.status(403).json({
-            error:true,
+            success:false,
             message:"Insufficient permissions"
         })
     }
@@ -85,7 +87,7 @@ function employerValidation(req,res,next){
         return next()
     }else{
         return res.status(403).json({
-            error:true,
+            success:false,
             message:"Insufficient permissions"
         })
     }
@@ -95,7 +97,7 @@ function employerAdminValidation(req,res,next){
         return next()
     }else{
         return res.status(403).json({
-            error:true,
+            success:false,
             message:"Insufficient permissions"
         })
     }
@@ -105,7 +107,7 @@ function applicantAdminValidation(req,res,next){
         return next()
     }else{
         return res.status(403).json({
-            error:true,
+            success:false,
             message:"Insufficient permissions"
         })
     }
@@ -115,7 +117,7 @@ function applicantEmployerAdminValidation(req, res, next){
         return next()
     } else{
         return res.status(403).json({
-            error: true,
+            success:false,
             message: "Permission denied"
         })
     }
